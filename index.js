@@ -26,7 +26,7 @@ app.get('/arenas/:name', async (req, res) => {
         await updateArenas()
     } catch (e) {
         console.error('Error updating arenas:', e);
-        return res.status(500).json({ error: 'Internal server error occurred' })
+        return res.status(500).json({ error: 'Internal server error occurred', log: e })
     }
 
     res.send({ [name]: getPlayersFromArena(name) })
@@ -39,6 +39,7 @@ app.listen(port, () => {
 const getPageContent = async () => {
     // Launch the browser and open a new blank page
     const browser = await puppeteer.launch({
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH? process.env.PUPPETEER_EXECUTABLE_PATH : false,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
