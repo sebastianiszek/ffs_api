@@ -41,12 +41,11 @@ const getPageContent = async () => {
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: '/opt/render/.cache/puppeteer/chrome/linux-136.0.7103.49/chrome-linux64/chrome'
     });
     const page = await browser.newPage();
 
     // Navigate the page to a URL.
-    await page.goto('https://ffs.gg/monitor.php');
+    await page.goto('https://ffs.gg/monitor.php', { waitUntil: 'networkidle2' });
 
     // Set screen size.
     await page.setViewport({ width: 1080, height: 1024 });
