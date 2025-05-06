@@ -94,11 +94,3 @@ const getPlayersFromArena = (arenaName) => {
   return arenas[arenaName] || 0;
 };
 
-app.use((req, res) => {
-  res
-    .status(404)
-    .json({
-      error: "Not found",
-      available: ["GET /arenas", "GET /arenas/:name"],
-    });
-});
